@@ -11,8 +11,8 @@ const projects = [
       'A fully functional e-commerce platform featuring product listings, shopping cart management, user authentication, and secure payment integration. Built with responsive design for optimal mobile and desktop experiences.',
     tech: ['React', 'Tailwind CSS', 'Firebase', 'JavaScript'],
     role: 'Frontend development, responsive design, payment integration',
-    link: 'https://zeeswear.netlify.app',
-    github: 'https://github.com/ZAIN1786-TECH/Zees-Wear',
+    link: 'https://multimarkets.netlify.app/',
+    github: 'https://github.com/ZAIN1786-TECH/Multi-Markets',
   },
   {
     id: 'service-website',
@@ -22,8 +22,8 @@ const projects = [
       'A comprehensive service platform with service listings, client reviews, booking management, and service provider dashboards. Designed for scalability and user-friendly navigation.',
     tech: ['React', 'Tailwind CSS', 'Firebase', 'REST APIs'],
     role: 'UI/UX implementation, frontend architecture',
-    link: '#',
-    github: '#',
+    link: 'https://all-tools-app.netlify.app/',
+    github: 'https://github.com/ZAIN1786-TECH/All-Tools-App',
   },
   {
     id: 'corporate-website',
@@ -33,8 +33,8 @@ const projects = [
       'Professional corporate website featuring company information, services showcase, team profiles, and contact forms. Optimized for performance and SEO best practices.',
     tech: ['React', 'Tailwind CSS', 'JavaScript', 'CSS'],
     role: 'Full frontend development, responsive design',
-    link: '#',
-    github: '#',
+    link: 'https://flutron.show',
+    github: 'https://github.com/ZAIN1786-TECH/Flutron',
   },
 ]
 
@@ -168,6 +168,8 @@ const ProjectsSection = () => {
                 <div className="flex flex-wrap gap-2 pt-2 text-xs">
                   <a
                     href={activeProject.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 rounded-full bg-slate-50 px-3 py-1.5 text-[11px] font-semibold text-slate-900 shadow-sm shadow-slate-900/30 transition hover:bg-slate-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                   >
                     <ExternalLink className="h-3 w-3" aria-hidden="true" />
@@ -175,6 +177,8 @@ const ProjectsSection = () => {
                   </a>
                   <a
                     href={activeProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 rounded-full border border-slate-700/80 bg-slate-950/80 px-3 py-1.5 text-[11px] font-semibold text-slate-100 hover:border-cyan-400/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                   >
                     <Github className="h-3 w-3" aria-hidden="true" />
