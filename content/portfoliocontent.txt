@@ -1,0 +1,102 @@
+=== HEADER ===
+Zain Ul Hassan — Frontend Engineer
+Navigation: Home | About | Services | Projects | Experience | Contact
+
+=== HERO SECTION ===
+Headline:
+I Build High-Converting Web Apps & Landing Pages for Startups & SaaS
+
+Subheadline:
+Frontend Engineer specializing in React, Tailwind CSS, and performance-driven UI — helping businesses turn visitors into customers.
+
+CTA:
+- View My Work
+- Start a Project
+
+Trust Line:
+✔ Available for freelance projects
+✔ Fast delivery • Clean code • Scalable solutions
+
+
+=== ABOUT SECTION ===
+I help startups, SaaS companies, and growing businesses build fast, scalable, and high-converting web applications.
+
+With 3+ years of experience in React, Tailwind CSS, and modern frontend technologies, I focus on creating interfaces that are not only visually appealing but also optimized for performance, usability, and conversion.
+
+I don’t just build websites — I build products that solve problems, improve user experience, and drive real results.
+
+Whether it’s a landing page, SaaS dashboard, or full web application, I ensure your product is fast, responsive, and built to scale.
+
+
+=== SERVICES SECTION ===
+Title: Services
+Subtitle: Frontend solutions designed to help your business grow.
+
+1. High-Converting Landing Pages
+- Increase conversions
+- Fast loading
+- Clear messaging
+
+2. Web Applications (React)
+- React.js development
+- Scalable architecture
+- Clean code
+
+3. UI/UX & Responsive Design
+- Mobile-first design
+- Smooth UX
+- Pixel-perfect UI
+
+4. Performance Optimization
+- Speed improvements
+- SEO-friendly structure
+- Maintainable code
+
+
+=== PROJECTS SECTION ===
+Title: Projects
+Subtitle: Selected projects focused on performance, scalability, and user experience.
+
+Project 1: E-Commerce Platform
+Built a scalable online store with fast browsing, smooth checkout, and optimized performance.
+Tech: React, Tailwind, Firebase
+
+Project 2: Service-Based Website
+Developed a professional website with booking system, responsive UI, and high conversion focus.
+Tech: React, Firebase, APIs
+
+Project 3: Corporate Website
+Created a modern business website with clean UI, responsiveness, and portfolio showcase.
+Tech: React, Tailwind, JavaScript
+
+
+=== EXPERIENCE SECTION ===
+Frontend Engineer with 3+ years of experience building scalable web applications and user-focused interfaces.
+
+Worked on:
+- E-commerce platforms
+- SaaS dashboards
+- Service-based websites
+
+Focused on:
+- Clean, maintainable code
+- Fast performance
+- Seamless user experience
+
+
+=== TESTIMONIALS SECTION ===
+“Zain delivered exactly what we needed — fast, clean, and professional. Highly recommended.”
+
+“Great communication and excellent frontend skills. The website performance improved significantly.”
+
+
+=== CONTACT SECTION ===
+Title: Let’s Build Something That Works
+
+Have a project in mind? Let’s discuss how I can help you build a fast, scalable, and high-converting web application.
+
+CTA:
+- Send a Message
+- Start Your Project Today
+
+⭐ Available for freelance projects — quick response guaranteed

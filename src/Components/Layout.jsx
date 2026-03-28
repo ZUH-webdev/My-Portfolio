@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 import { Moon, SunMedium, Menu, X } from 'lucide-react'
 import HeroSection from '../sections/HeroSection'
 import AboutSection from '../sections/AboutSection'
@@ -8,7 +9,7 @@ import ProjectsSection from '../sections/ProjectsSection'
 import ExperienceSection from '../sections/ExperienceSection'
 import TestimonialsSection from '../sections/TestimonialsSection'
 import ContactSection from '../sections/ContactSection'
-import { applyTheme, getInitialTheme } from '../theme'
+// ...existing code...
 import profile from '../../public/profilePic.jpeg'
 
 
@@ -19,7 +20,6 @@ const navItems = [
   { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
   { id: 'testimonials', label: 'Testimonials' },
-  { id: 'contact', label: 'Contact' },
 ]
 
 function scrollToId(id) {
@@ -29,16 +29,61 @@ function scrollToId(id) {
 }
 
 const Layout = () => {
-  const [theme, setTheme] = useState(() => getInitialTheme())
+  // Theme logic removed
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [showModal, setShowModal] = useState(false)
+  const [modalStatus, setModalStatus] = useState('idle') // idle | sending | success
 
-  useEffect(() => {
-    applyTheme(theme)
-  }, [theme])
+  // Modal contact form submit handler (same logic as ContactSection)
+  const handleModalSubmit = async (event) => {
+    event.preventDefault()
+    if (modalStatus === 'sending') return
+    setModalStatus('sending')
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+    if (!serviceId || !templateId || !publicKey) {
+      // eslint-disable-next-line no-console
+      console.error(
+        'EmailJS not configured. Update .env with:\n' +
+        'VITE_EMAILJS_SERVICE_ID = your service id\n' +
+        'VITE_EMAILJS_TEMPLATE_ID = your template id\n' +
+        'VITE_EMAILJS_PUBLIC_KEY = your public key\n' +
+        'See https://www.emailjs.com/'
+      )
+      alert('Email service not configured. Check browser console for setup instructions.')
+      setModalStatus('idle')
+      return
+    }
+
+    try {
+      const form = event.target
+      const formData = new FormData(form)
+      const payload = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        message: formData.get('message'),
+      }
+
+      await emailjs.send(serviceId, templateId, payload, publicKey)
+      setModalStatus('success')
+      form.reset()
+      setTimeout(() => {
+        setModalStatus('idle')
+        setShowModal(false)
+      }, 2000)
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Failed to send contact message', err)
+      setModalStatus('idle')
+    }
   }
+
+  // Theme effect removed
+
+  // Theme toggle removed
 
   const handleNavClick = (id) => {
     setMobileOpen(false)
@@ -72,7 +117,7 @@ const Layout = () => {
                 alt="Zain Ul Hassan"
                 className="h-10 w-10 rounded-full object-cover border-2 border-indigo-500"
               />
-              <span className="hidden sm:inline">Zain · Frontend Engineer</span>
+              <span className="hidden sm:inline">Zain · Saas & Startup Specialist</span>
             </button>
 
             <nav className="hidden items-center gap-6 text-sm font-medium text-slate-300 md:flex">
@@ -89,40 +134,15 @@ const Layout = () => {
             </nav>
 
             <div className="flex items-center gap-2">
+              {/* CTA Button */}
               <button
                 type="button"
-                onClick={toggleTheme}
-                aria-label="Toggle dark mode"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-700/80 bg-slate-900/70 shadow-sm shadow-slate-900/50 transition hover:border-cyan-400/70 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+                className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-indigo-500 via-violet-500 to-cyan-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/40 transition hover:shadow-xl hover:shadow-violet-500/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+                onClick={() => setShowModal(true)}
               >
-                <AnimatePresence mode="wait" initial={false}>
-                  {theme === 'dark' ? (
-                    <motion.span
-                      key="moon"
-                      initial={{ opacity: 0, rotate: -90, y: -4 }}
-                      animate={{ opacity: 1, rotate: 0, y: 0 }}
-                      exit={{ opacity: 0, rotate: 90, y: 4 }}
-                      transition={{ duration: 0.18 }}
-                    >
-                      <Moon className="h-4 w-4 text-cyan-300" aria-hidden="true" />
-                    </motion.span>
-                  ) : (
-                    <motion.span
-                      key="sun"
-                      initial={{ opacity: 0, rotate: 90, y: -4 }}
-                      animate={{ opacity: 1, rotate: 0, y: 0 }}
-                      exit={{ opacity: 0, rotate: -90, y: 4 }}
-                      transition={{ duration: 0.18 }}
-                    >
-                      <SunMedium
-                        className="h-4 w-4 text-amber-400"
-                        aria-hidden="true"
-                      />
-                    </motion.span>
-                  )}
-                </AnimatePresence>
+                Start a Project
               </button>
-
+              {/* Mobile menu button */}
               <button
                 type="button"
                 onClick={() => setMobileOpen((prev) => !prev)}
@@ -163,7 +183,96 @@ const Layout = () => {
           </AnimatePresence>
         </header>
 
-        {/* Main content */}
+         {/* Contact Modal */}
+         <AnimatePresence>
+           {showModal && (
+             <motion.div
+               className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               exit={{ opacity: 0 }}
+             >
+               <motion.div
+                 className="relative w-full max-w-md rounded-xl border border-white/10 bg-slate-900/80 p-8 shadow-2xl backdrop-blur-xl"
+                 initial={{ scale: 0.92, opacity: 0 }}
+                 animate={{ scale: 1, opacity: 1 }}
+                 exit={{ scale: 0.92, opacity: 0 }}
+                 transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+               >
+                 <button
+                   className="absolute right-4 top-4 rounded-full bg-slate-800/60 p-1 text-slate-300 hover:bg-slate-700 hover:text-white focus:outline-none"
+                   onClick={() => setShowModal(false)}
+                   aria-label="Close modal"
+                 >
+                   <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M18 6 6 18M6 6l12 12"/></svg>
+                 </button>
+                 <h2 className="mb-2 text-xl font-bold text-white">Start a Project</h2>
+                 <p className="mb-6 text-sm text-slate-300">Let’s discuss your requirements and how I can help.</p>
+                 <form onSubmit={handleModalSubmit} className="space-y-4">
+                   <div>
+                     <label htmlFor="name" className="block text-xs font-medium text-slate-300 mb-1">Name</label>
+                     <input
+                       id="name"
+                       name="name"
+                       type="text"
+                       required
+                       className="w-full rounded-lg border border-white/10 bg-slate-800/70 px-3 py-2 text-sm text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none"
+                       placeholder="Your name"
+                     />
+                   </div>
+                   <div>
+                     <label htmlFor="email" className="block text-xs font-medium text-slate-300 mb-1">Email</label>
+                     <input
+                       id="email"
+                       name="email"
+                       type="email"
+                       required
+                       className="w-full rounded-lg border border-white/10 bg-slate-800/70 px-3 py-2 text-sm text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none"
+                       placeholder="you@email.com"
+                     />
+                   </div>
+                   <div>
+                     <label htmlFor="message" className="block text-xs font-medium text-slate-300 mb-1">Project Description / Requirements</label>
+                     <textarea
+                       id="message"
+                       name="message"
+                       required
+                       rows={4}
+                       className="w-full rounded-lg border border-white/10 bg-slate-800/70 px-3 py-2 text-sm text-white placeholder-slate-400 focus:border-cyan-400 focus:outline-none"
+                       placeholder="Describe your project..."
+                     />
+                   </div>
+                   <div className="pt-2">
+                     <button
+                       type="submit"
+                       disabled={modalStatus === 'sending'}
+                       className="w-full rounded-lg bg-cyan-500 px-4 py-2 font-semibold text-white shadow transition-transform hover:scale-105 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 disabled:opacity-70"
+                     >
+                       {modalStatus === 'sending' ? 'Sending…' : 'Send message'}
+                     </button>
+                   </div>
+                   <div className="h-6 text-center text-xs">
+                     <AnimatePresence>
+                       {modalStatus === 'success' && (
+                         <motion.span
+                           initial={{ opacity: 0, y: 4 }}
+                           animate={{ opacity: 1, y: 0 }}
+                           exit={{ opacity: 0, y: -4 }}
+                           transition={{ duration: 0.2 }}
+                           className="text-emerald-300"
+                         >
+                           Message sent! I’ll be in touch shortly.
+                         </motion.span>
+                       )}
+                     </AnimatePresence>
+                   </div>
+                 </form>
+               </motion.div>
+             </motion.div>
+           )}
+         </AnimatePresence>
+
+         {/* Main content */}
         <motion.main
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
@@ -195,7 +304,7 @@ const Layout = () => {
                 GitHub
               </a>
               <a
-                href="https://www.linkedin.com/in/zain-ul-hassan-061589360?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                href="https://www.linkedin.com/in/zain-ul-hassan-dev?utm_source=share_via&utm_content=profile&utm_medium=member_android"
                 target="_blank"
                 rel="noreferrer"
                 className="rounded-full px-3 py-1 text-xs font-medium text-slate-300 transition hover:text-cyan-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"

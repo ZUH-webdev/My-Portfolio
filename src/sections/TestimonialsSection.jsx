@@ -22,9 +22,16 @@ const testimonials = [
   },
 ]
 
+
 const TestimonialsSection = () => {
   const [index, setIndex] = useState(0)
-  const active = testimonials[index]
+  // Show 2 testimonials at a time
+  const getVisible = () => {
+    if (testimonials.length <= 2) return testimonials
+    if (index === testimonials.length - 1) return [testimonials[index], testimonials[0]]
+    return [testimonials[index], testimonials[index + 1]]
+  }
+  const visible = getVisible()
 
   const goTo = (dir) => {
     setIndex((prev) => {
@@ -38,75 +45,50 @@ const TestimonialsSection = () => {
       id="testimonials"
       className="rounded-3xl border border-slate-800/80 bg-slate-950/70 px-5 py-8 sm:px-8 sm:py-10"
     >
-      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h2 className="text-lg font-semibold text-slate-50 sm:text-xl">
-            Testimonials
-          </h2>
-          <p className="text-xs text-slate-400 sm:text-sm">
-            Kind words from product leaders and founders.
-          </p>
-        </div>
+      <div className="mb-6">
+        <h2 className="text-lg font-semibold text-slate-50 sm:text-xl text-center">
+          Testimonials
+        </h2>
+        <p className="text-xs text-slate-400 sm:text-sm text-center">
+          Kind words from product leaders and founders.
+        </p>
       </div>
 
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <div className="order-2 w-full md:order-1 md:w-2/3">
-          <div className="relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-950/90 p-4">
-            <AnimatePresence mode="wait">
-              <motion.figure
-                key={active.name}
-                initial={{ opacity: 0, x: 16 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -16 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
-              >
-                <blockquote className="mb-3 text-sm text-slate-200">
-                  “{active.quote}”
-                </blockquote>
-                <figcaption className="text-xs text-slate-300">
-                  <p className="font-semibold text-slate-50">{active.name}</p>
-                  <p className="text-[11px] text-slate-400">{active.role}</p>
-                </figcaption>
-              </motion.figure>
-            </AnimatePresence>
-          </div>
-        </div>
-
-        <div className="order-1 flex w-full items-center justify-between gap-3 md:order-2 md:w-1/3">
-          <div className="flex gap-2">
-            {testimonials.map((t, i) => (
-              <button
-                key={t.name}
-                type="button"
-                onClick={() => setIndex(i)}
-                className={`h-1.5 flex-1 rounded-full ${
-                  i === index ? 'bg-cyan-400' : 'bg-slate-700'
-                }`}
-                aria-label={`Show testimonial from ${t.name}`}
-                aria-pressed={i === index}
-              />
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => goTo(-1)}
-              className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-700/80 bg-slate-900/80 text-slate-300 shadow-sm shadow-slate-900 hover:border-slate-500 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-              aria-label="Previous testimonial"
-            >
-              ‹
-            </button>
-            <button
-              type="button"
-              onClick={() => goTo(1)}
-              className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-700/80 bg-slate-900/80 text-slate-300 shadow-sm shadow-slate-900 hover:border-slate-500 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
-              aria-label="Next testimonial"
-            >
-              ›
-            </button>
-          </div>
-        </div>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 mb-8">
+        {visible.map((t) => (
+          <motion.figure
+            key={t.name}
+            className="relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-950/90 p-4"
+            initial={{ opacity: 0, x: 16 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -16 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+          >
+            <blockquote className="mb-3 text-sm text-slate-200">“{t.quote}”</blockquote>
+            <figcaption className="text-xs text-slate-300">
+              <p className="font-semibold text-slate-50">{t.name}</p>
+              <p className="text-[11px] text-slate-400">{t.role}</p>
+            </figcaption>
+          </motion.figure>
+        ))}
+      </div>
+      <div className="flex items-center justify-center gap-4">
+        <button
+          type="button"
+          onClick={() => goTo(-1)}
+          className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-700/80 bg-slate-900/80 text-slate-300 shadow-sm shadow-slate-900 hover:border-slate-500 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+          aria-label="Previous testimonials"
+        >
+          ‹
+        </button>
+        <button
+          type="button"
+          onClick={() => goTo(1)}
+          className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-slate-700/80 bg-slate-900/80 text-slate-300 shadow-sm shadow-slate-900 hover:border-slate-500 hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+          aria-label="Next testimonials"
+        >
+          ›
+        </button>
       </div>
     </section>
   )

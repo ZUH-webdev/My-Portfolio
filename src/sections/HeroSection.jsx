@@ -47,12 +47,12 @@ const HeroSection = ({ onCtaScroll }) => {
               animate="visible"
               custom={0}
             >
-              Building beautiful &
-              <span className="bg-linear-to-r from-indigo-400 via-violet-400 to-cyan-300 bg-clip-text text-transparent">
+              Building High Converting
+              <span className="bg-linear-to-r from-indigo-600 via-violet-500 to-cyan-400 bg-clip-text text-transparent">
                 {' '}
-                functional web apps
+                Saas web apps
               </span>
-              .
+              
             </motion.h1>
 
             <motion.p
@@ -76,7 +76,7 @@ const HeroSection = ({ onCtaScroll }) => {
             <button
               type="button"
               onClick={() => onCtaScroll?.('projects')}
-              className="group inline-flex items-center gap-2 rounded-full bg-linear-to-r from-indigo-500 via-violet-500 to-cyan-400 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/40 transition hover:shadow-xl hover:shadow-violet-500/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+              className="group inline-flex items-center gap-2 rounded-full bg-linear-to-r from-indigo-500 via-violet-500 to-cyan-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/40 transition hover:shadow-xl hover:shadow-violet-500/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
             >
               View Projects
               <ArrowRight
