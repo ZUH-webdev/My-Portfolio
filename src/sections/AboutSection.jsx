@@ -26,7 +26,7 @@ const tileVariant = {
 
 const AboutSection = () => {
   const capabilities = [
-    { icon: Code2, label: 'Frontend Eng', items: ['React', 'Next.js', 'TypeScript'] },
+    { icon: Code2, label: 'Frontend Eng', items: ['React', 'Next.js', 'TypeScript','Javascript'] },
     { icon: Palette, label: 'Design Systems', items: ['Tailwind', 'Responsive', 'A11y'] },
     { icon: Cpu, label: 'Performance', items: ['Core Web Vitals', 'Optimization', 'Analytics'] },
     { icon: Zap, label: 'Full Stack', items: ['APIs', 'Databases', 'Auth'] },
@@ -34,7 +34,7 @@ const AboutSection = () => {
     { icon: Smartphone, label: 'Mobile', items: ['Responsive', 'Cross-browser', 'Touch'] },
   ]
 
-  const techStack = ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Firebase', 'Node.js', 'REST APIs', 'GraphQL', 'Framer Motion']
+  const techStack = ['React', 'Next.js','Javascript', 'TypeScript', 'Figma','Tailwind CSS', 'Botstrap','Firebase', 'Node.js', 'REST APIs', 'Git', 'Framer Motion']
 
   return (
     <motion.section

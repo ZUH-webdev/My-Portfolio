@@ -34,6 +34,7 @@ const Layout = () => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [showModal, setShowModal] = useState(false)
   const [modalStatus, setModalStatus] = useState('idle') // idle | sending | success
+  const [focusedField, setFocusedField] = useState(null)
 
   // Modal contact form submit handler (same logic as ContactSection)
   const handleModalSubmit = async (event) => {
@@ -94,7 +95,7 @@ const Layout = () => {
   return (
     <div className="relative min-h-screen bg-[#020617] text-slate-100 selection:bg-indigo-500/30 transition-colors duration-300">
       {/* Noise texture overlay for 'Elite' feel */}
-      <div className="pointer-events-none fixed inset-0 z-[100] opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
+      <div className="pointer-events-none fixed inset-0 z-100 opacity-[0.03] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
 
       {/* Background gradient accents */}
       <div
@@ -170,7 +171,7 @@ const Layout = () => {
 
                   {/* Close button - High priority z-index and expanded touch area */}
                   <button
-                    className="absolute right-4 top-4 z-[100] flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-400 transition-all hover:bg-white/10 hover:text-white sm:h-9 sm:w-9"
+                    className="absolute right-4 top-4 z-100 flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-slate-400 transition-all hover:bg-white/10 hover:text-white sm:h-9 sm:w-9"
                     onClick={() => setShowModal(false)}
                     aria-label="Close modal"
                   >
@@ -187,9 +188,19 @@ const Layout = () => {
                     </p>
                   </div>
 
-                  <form onSubmit={handleModalSubmit} className="relative z-10 space-y-4 sm:space-y-6">
+                  <form onSubmit={handleModalSubmit} className="relative z-10 space-y-4 sm:space-y-6 group">
+                    {/* Form Ambient Glow - Background */}
+                    <div className="absolute -inset-px rounded-2xl bg-linear-to-br from-indigo-500/20 to-purple-500/10 opacity-0 blur-2xl pointer-events-none transition-opacity duration-500 group-focus-within:opacity-100" />
                     {/* Name Field */}
-                    <div className="group relative">
+                    <div className="group/field relative">
+                      {/* Focus Glow Background */}
+                      <motion.div
+                        className="absolute -inset-x-4 -inset-y-3 rounded-lg bg-indigo-500/0 blur-lg pointer-events-none"
+                        animate={{
+                          backgroundColor: focusedField === 'name' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(99, 102, 241, 0)',
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
                       <label htmlFor="name" className="mb-1 block font-geist-mono text-[8px] font-bold uppercase tracking-[0.2em] text-slate-500 sm:text-[9px]">
                         NAME
                       </label>
@@ -199,19 +210,33 @@ const Layout = () => {
                           name="name"
                           type="text"
                           required
+                          onFocus={() => setFocusedField('name')}
+                          onBlur={() => setFocusedField(null)}
                           placeholder="Your identity"
-                          className="peer w-full bg-transparent py-1.5 font-geist text-sm text-white placeholder-slate-800 outline-none transition-all sm:py-2 sm:text-base"
+                          className="peer relative w-full bg-transparent py-1.5 font-geist text-sm text-white placeholder-slate-800 outline-none transition-all sm:py-2 sm:text-base focus:border-indigo-500"
                         />
                         <div className="absolute bottom-0 left-0 h-px w-full bg-white/10" />
-                        <motion.div 
-                          className="absolute bottom-0 left-0 h-[2.5px] w-full bg-indigo-500 origin-center scale-x-0 transition-transform duration-500 peer-focus:scale-x-100"
-                        />
-                        <div className="pointer-events-none absolute -inset-x-4 -inset-y-2 rounded-xl bg-indigo-500/0 blur-2xl transition-all duration-500 peer-focus:bg-indigo-500/5" />
+                        {/* Animated Underline */}
+                        {focusedField === 'name' && (
+                          <motion.div
+                            className="absolute bottom-0 left-0 h-[2px] w-full bg-linear-to-r from-indigo-500 to-purple-500 rounded-full"
+                            layoutId="modal-underline"
+                            transition={{ duration: 0.3 }}
+                          />
+                        )}
                       </div>
                     </div>
 
                     {/* Email Field */}
-                    <div className="group relative">
+                    <div className="group/field relative">
+                      {/* Focus Glow Background */}
+                      <motion.div
+                        className="absolute -inset-x-4 -inset-y-3 rounded-lg bg-indigo-500/0 blur-lg pointer-events-none"
+                        animate={{
+                          backgroundColor: focusedField === 'email' ? 'rgba(99, 102, 241, 0.1)' : 'rgba(99, 102, 241, 0)',
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
                       <label htmlFor="email" className="mb-1 block font-geist-mono text-[8px] font-bold uppercase tracking-[0.2em] text-slate-500 sm:text-[9px]">
                         EMAIL
                       </label>
@@ -221,19 +246,33 @@ const Layout = () => {
                           name="email"
                           type="email"
                           required
+                          onFocus={() => setFocusedField('email')}
+                          onBlur={() => setFocusedField(null)}
                           placeholder="hello@world.com"
-                          className="peer w-full bg-transparent py-1.5 font-geist text-sm text-white placeholder-slate-800 outline-none transition-all sm:py-2 sm:text-base"
+                          className="peer relative w-full bg-transparent py-1.5 font-geist text-sm text-white placeholder-slate-800 outline-none transition-all sm:py-2 sm:text-base focus:border-indigo-500"
                         />
                         <div className="absolute bottom-0 left-0 h-px w-full bg-white/10" />
-                        <motion.div 
-                          className="absolute bottom-0 left-0 h-[2.5px] w-full bg-indigo-500 origin-center scale-x-0 transition-transform duration-500 peer-focus:scale-x-100"
-                        />
-                        <div className="pointer-events-none absolute -inset-x-4 -inset-y-2 rounded-xl bg-indigo-500/0 blur-2xl transition-all duration-500 peer-focus:bg-indigo-500/5" />
+                        {/* Animated Underline */}
+                        {focusedField === 'email' && (
+                          <motion.div
+                            className="absolute bottom-0 left-0 h-[2px] w-full bg-linear-to-r from-indigo-500 to-purple-500 rounded-full"
+                            layoutId="modal-underline"
+                            transition={{ duration: 0.3 }}
+                          />
+                        )}
                       </div>
                     </div>
 
                     {/* Message Field */}
-                    <div className="group relative">
+                    <div className="group/field relative">
+                      {/* Focus Glow Background */}
+                      <motion.div
+                        className="absolute -inset-x-4 -inset-y-3 rounded-lg bg-purple-500/0 blur-lg pointer-events-none"
+                        animate={{
+                          backgroundColor: focusedField === 'message' ? 'rgba(168, 85, 247, 0.1)' : 'rgba(168, 85, 247, 0)',
+                        }}
+                        transition={{ duration: 0.3 }}
+                      />
                       <label htmlFor="message" className="mb-1 block font-geist-mono text-[8px] font-bold uppercase tracking-[0.2em] text-slate-500 sm:text-[9px]">
                         PROJECT SPECS
                       </label>
@@ -243,14 +282,20 @@ const Layout = () => {
                           name="message"
                           required
                           rows={2}
+                          onFocus={() => setFocusedField('message')}
+                          onBlur={() => setFocusedField(null)}
                           placeholder="Requirements..."
-                          className="peer w-full resize-none bg-transparent py-1.5 font-geist text-sm text-white placeholder-slate-800 outline-none transition-all sm:py-2 sm:text-base"
+                          className="peer relative w-full resize-none bg-transparent py-1.5 font-geist text-sm text-white placeholder-slate-800 outline-none transition-all sm:py-2 sm:text-base focus:border-purple-500"
                         />
                         <div className="absolute bottom-0 left-0 h-px w-full bg-white/10" />
-                        <motion.div 
-                          className="absolute bottom-0 left-0 h-[2.5px] w-full bg-indigo-500 origin-center scale-x-0 transition-transform duration-500 peer-focus:scale-x-100"
-                        />
-                        <div className="pointer-events-none absolute -inset-x-4 -inset-y-2 rounded-xl bg-indigo-500/0 blur-2xl transition-all duration-500 peer-focus:bg-indigo-500/5" />
+                        {/* Animated Underline */}
+                        {focusedField === 'message' && (
+                          <motion.div
+                            className="absolute bottom-0 left-0 h-[2px] w-full bg-linear-to-r from-purple-500 to-indigo-500 rounded-full"
+                            layoutId="modal-underline"
+                            transition={{ duration: 0.3 }}
+                          />
+                        )}
                       </div>
                     </div>
 
