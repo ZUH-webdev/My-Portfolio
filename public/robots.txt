@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /src/
+Allow: /public/
+
+# Directories to ignore
+Disallow: /node_modules/
+Disallow: /dist/
+
+# Host and Sitemap
+Host: https://zainulhassan.site
+Sitemap: https://zainulhassan.site/sitemap.xml

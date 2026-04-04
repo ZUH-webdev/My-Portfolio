@@ -64,9 +64,9 @@ const ExperienceSection = () => {
 
       {/* Watermark EXPERIENCE */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <h1 className="absolute top-10 left-0 text-[420px] font-geist font-black text-white/[0.02] leading-[0.8] whitespace-nowrap">
+        <div aria-hidden="true" className="absolute top-10 left-0 text-[420px] font-geist font-black text-white/[0.02] leading-[0.8] whitespace-nowrap">
           EXPERIENCE
-        </h1>
+        </div>
       </div>
 
       <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-12">

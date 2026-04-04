@@ -183,9 +183,9 @@ const TestimonialsSection = () => {
 
       {/* Watermark RESULTS/TRUST */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <h1 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[320px] font-geist font-black text-white/[0.015] leading-[0.8] whitespace-nowrap">
+        <div aria-hidden="true" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[320px] font-geist font-black text-white/[0.015] leading-[0.8] whitespace-nowrap">
           RESULTS
-        </h1>
+        </div>
       </div>
 
       <div className="relative z-20">

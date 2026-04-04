@@ -93,7 +93,7 @@ const ProjectCard = ({ project, index }) => {
               <div className="bg-slate-950 rounded-xl overflow-hidden flex items-center justify-center border border-slate-700 relative aspect-video">
                 <img 
                   src={project.image} 
-                  alt={`${project.name} mockup`} 
+                  alt={`${project.name} - ${project.subtitle} | Full Stack Development Project`} 
                   className="w-full h-full object-cover object-top opacity-90 hover:opacity-100 transition-opacity duration-500 hover:scale-105"
                   loading="lazy"
                 />

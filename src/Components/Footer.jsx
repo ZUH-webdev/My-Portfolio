@@ -66,9 +66,9 @@ const Footer = () => {
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Subtle Watermark - Anchored low */}
         <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 select-none">
-          <h2 className="text-[35vw] font-black text-white/[0.02] leading-none tracking-tighter font-syne uppercase">
+          <div aria-hidden="true" className="text-[35vw] font-black text-white/[0.02] leading-none tracking-tighter font-syne uppercase">
             ZAIN
-          </h2>
+          </div>
         </div>
         
         {/* Grain Overlay */}

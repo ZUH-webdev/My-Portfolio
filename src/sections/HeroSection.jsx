@@ -69,6 +69,9 @@ const HeroSection = ({ onCtaScroll }) => {
         backgroundSize: '200px 200px'
       }} />
       
+      {/* Main Page H1 - Visually Hidden for SEO */}
+      <h1 className="sr-only">Zain UI Hassan - Full Stack Web Developer & Software Engineer</h1>
+
       {/* Deep Ambient Lighting Orbs - Enhanced Stage Lighting */}
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <motion.div 
@@ -200,7 +203,9 @@ const HeroSection = ({ onCtaScroll }) => {
             >
               <img 
                 src="/myPP.png" 
-                alt="Zain" 
+                alt="Zain UI Hassan - Full Stack MERN Developer specializing in SaaS and startup solutions" 
+                loading="lazy"
+
                 className="relative z-10 w-full h-full object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-700 ease-out"
               />
               
