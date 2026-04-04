@@ -1,0 +1,31 @@
+
+> portfolio@0.0.0 build
+> vite build
+
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32m✓[39m 14 modules transformed.
+[31m✗[39m Build failed in 508ms
+[31merror during build:
+[31m[vite:esbuild] Transform failed with 1 error:
+E:/Projects/Portfolio/src/Components/Layout.jsx:19:7: ERROR: The symbol "profile" has already been declared[31m
+file: [36mE:/Projects/Portfolio/src/Components/Layout.jsx:19:7[31m
+[33m
+[33mThe symbol "profile" has already been declared[33m
+17 |  const ContactSection = lazy(() => import('../sections/ContactSection'))
+18 |  
+19 |  import profile from '../../public/profilePic.jpeg'
+   |         ^
+20 |  
+21 |  const navItems = [
+[31m
+    at failureErrorWithLog (E:\Projects\Portfolio\node_modules\esbuild\lib\main.js:1467:15)
+    at E:\Projects\Portfolio\node_modules\esbuild\lib\main.js:736:50
+    at responseCallbacks.<computed> (E:\Projects\Portfolio\node_modules\esbuild\lib\main.js:603:9)
+    at handleIncomingPacket (E:\Projects\Portfolio\node_modules\esbuild\lib\main.js:658:12)
+    at Socket.readFromStdout (E:\Projects\Portfolio\node_modules\esbuild\lib\main.js:581:7)
+    at Socket.emit (node:events:508:28)
+    at addChunk (node:internal/streams/readable:559:12)
+    at readableAddChunkPushByteMode (node:internal/streams/readable:510:3)
+    at Readable.push (node:internal/streams/readable:390:5)
+    at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)[39m
