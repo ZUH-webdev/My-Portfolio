@@ -1,18 +1,20 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 import { Moon, SunMedium, Menu, X } from 'lucide-react'
 import Magnetic from './Magnetic'
-import HeroSection from '../sections/HeroSection'
-import AboutSection from '../sections/AboutSection'
-import ServicesSection from '../sections/ServicesSection'
-import ProjectsSection from '../sections/ProjectsSection'
-import ExperienceSection from '../sections/ExperienceSection'
-import TestimonialsSection from '../sections/TestimonialsSection'
-import ContactSection from '../sections/ContactSection'
 import Header from './Header'
 import Footer from './Footer'
+import SectionFallback from './SectionFallback'
 import profile from '../../public/profilePic.jpeg'
+
+const HeroSection = lazy(() => import('../sections/HeroSection'))
+const AboutSection = lazy(() => import('../sections/AboutSection'))
+const ServicesSection = lazy(() => import('../sections/ServicesSection'))
+const ProjectsSection = lazy(() => import('../sections/ProjectsSection'))
+const ExperienceSection = lazy(() => import('../sections/ExperienceSection'))
+const TestimonialsSection = lazy(() => import('../sections/TestimonialsSection'))
+const ContactSection = lazy(() => import('../sections/ContactSection'))
 
 const navItems = [
   { id: 'hero', label: 'Home' },
@@ -350,13 +352,27 @@ const Layout = () => {
           transition={{ duration: 0.4, ease: 'easeOut' }}
           className="flex flex-1 flex-col gap-24 py-10 sm:py-16"
         >
-          <HeroSection onCtaScroll={scrollToId} />
-          <AboutSection />
-          <ServicesSection />
-          <ProjectsSection />
-          <ExperienceSection />
-          <TestimonialsSection />
-          <ContactSection />
+          <Suspense fallback={<SectionFallback />}>
+            <HeroSection onCtaScroll={scrollToId} />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <AboutSection />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <ServicesSection />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <ProjectsSection />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <ExperienceSection />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <TestimonialsSection />
+          </Suspense>
+          <Suspense fallback={<SectionFallback />}>
+            <ContactSection />
+          </Suspense>
         </motion.main>
 
         {/* Footer */}
