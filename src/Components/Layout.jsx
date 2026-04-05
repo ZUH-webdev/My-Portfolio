@@ -3,16 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 import { Moon, SunMedium, Menu, X } from 'lucide-react'
 import Magnetic from './Magnetic'
-import HeroSection from '../sections/HeroSection'
-import AboutSection from '../sections/AboutSection'
-import ServicesSection from '../sections/ServicesSection'
-import TestimonialsSection from '../sections/TestimonialsSection'
-import ContactSection from '../sections/ContactSection'
 import Header from './Header'
 import Footer from './Footer'
+import HeroSection from '../sections/HeroSection'
+import TestimonialsSection from '../sections/TestimonialsSection'
+import ContactSection from '../sections/ContactSection'
 import profile from '../../public/myPP.webp'
 
-// Lazy load sections that are "far" or heavy
+// Lazy load sections that are scroll-dependent
+const AboutSection = lazy(() => import('../sections/AboutSection'))
+const ServicesSection = lazy(() => import('../sections/ServicesSection'))
 const ProjectsSection = lazy(() => import('../sections/ProjectsSection'))
 const ExperienceSection = lazy(() => import('../sections/ExperienceSection'))
 
@@ -353,10 +353,10 @@ const Layout = () => {
           className="flex flex-1 flex-col gap-24 py-10 sm:py-16"
         >
           <HeroSection onCtaScroll={scrollToId} />
-          <AboutSection />
-          <ServicesSection />
           
           <Suspense fallback={null}>
+            <AboutSection />
+            <ServicesSection />
             <ProjectsSection />
             <ExperienceSection />
           </Suspense>

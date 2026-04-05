@@ -205,7 +205,7 @@ const HeroSection = ({ onCtaScroll }) => {
                width="256" height="256"
                 src="/myPP.webp" 
                 alt="Zain UI Hassan - Full Stack MERN Developer specializing in SaaS and startup solutions" 
-                loading="lazy"
+                loading="eager"
 
                 className="relative z-10 w-full h-full object-cover grayscale-[30%] hover:grayscale-0 transition-all duration-700 ease-out"
               />
