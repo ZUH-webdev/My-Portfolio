@@ -38,7 +38,7 @@ const AboutSection = () => {
 
   return (
     <motion.section
-      id="about"
+      aria-label="About"
       className="relative min-h-screen rounded-3xl border border-white/5 bg-[#020617]/50 px-6 py-20 shadow-[0_0_80px_rgba(15,23,42,0.9)] sm:px-12 lg:px-20 lg:py-32 backdrop-blur-3xl overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}

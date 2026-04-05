@@ -53,7 +53,7 @@ const cardVariants = {
 const ServicesSection = () => {
   return (
     <section
-      id="services"
+      aria-label="Services"
       className="relative rounded-3xl border border-white/5 bg-[#020617]/50 px-6 pt-32 pb-20 shadow-[0_0_80px_rgba(15,23,42,0.9)] sm:px-12 lg:px-20 lg:py-32 backdrop-blur-3xl overflow-hidden"
     >
       {/* Ambient Lighting Orbs */}
@@ -89,7 +89,10 @@ const ServicesSection = () => {
 
       {/* Services Grid */}
       <div className="grid gap-6 lg:grid-cols-2 relative z-20">
-        {services.map(({ icon: Icon, title, description, badge, color, highlight }, idx) => (
+        {services.map((service, idx) => {
+          const Icon = service.icon
+          const { title, description, badge, color, highlight } = service
+          return (
           <motion.div
             key={title}
             className="group relative rounded-3xl border border-white/5 bg-white/[0.02] p-8 transition-all hover:bg-white/[0.05]"
@@ -145,7 +148,8 @@ const ServicesSection = () => {
               </motion.div>
             </div>
           </motion.div>
-        ))}
+          )
+        })}
       </div>
 
       {/* Trust Section */}

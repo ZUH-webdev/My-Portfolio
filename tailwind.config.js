@@ -5,9 +5,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'geist': ['Geist', 'sans-serif'],
-        'inter': ['Inter', 'sans-serif'],
-        'mono': ['Geist Mono', 'monospace'],
+        geist: ['Geist', 'system-ui', 'sans-serif'],
+        inter: ['Geist', 'system-ui', 'sans-serif'],
+        'geist-mono': ['Geist Mono', 'ui-monospace', 'monospace'],
+        mono: ['Geist Mono', 'ui-monospace', 'monospace'],
       },
       fontSize: {
         'display': ['6rem', { lineHeight: '1.1', letterSpacing: '-0.04em' }],

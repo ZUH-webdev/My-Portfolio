@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react'
-import emailjs from '@emailjs/browser'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Mail, MapPin, ArrowRight } from 'lucide-react'
 
@@ -56,6 +55,7 @@ const ContactSection = () => {
         message: formData.get('message'),
       }
 
+      const { default: emailjs } = await import('@emailjs/browser')
       await emailjs.send(serviceId, templateId, payload, publicKey)
       setStatus('success')
       form.reset()
@@ -69,7 +69,7 @@ const ContactSection = () => {
 
   return (
     <section
-      id="contact"
+      aria-label="Contact"
       className="relative w-full py-20 lg:py-32 border border-slate-800/30 rounded-3xl overflow-hidden bg-gradient-to-b from-slate-950/80 via-slate-950/50 to-slate-950/80"
       onMouseMove={handleMouseMove}
       ref={containerRef}
