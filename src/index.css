@@ -1,8 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* Fonts load from index.html (non-blocking stylesheet + display=swap) to avoid render-blocking @import chains */
 
 @import "tailwindcss";
 
@@ -16,8 +12,14 @@
   }
 
   body {
-    font-family: 'Geist', 'Inter', system-ui, sans-serif;
+    font-family: 'Geist', system-ui, sans-serif;
   }
+}
+
+/* Local grain — avoids extra DNS/TLS to third-party CDNs on critical path */
+@utility layout-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch' /%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' /%3E%3C/svg%3E");
+  background-size: 200px 200px;
 }
 @utility sr-only {  
   position: absolute;
@@ -37,4 +39,174 @@
   
   /* While you're at it, define your agency brand colors here */
   --color-indigo-500: #6366f1;
+}
+
+/* ── Hero: CSS-only entrance (GPU transforms, no Framer / no JS paint triggers) ── */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 30px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes hero-glass-a {
+  from {
+    opacity: 0;
+    transform: rotate(-15deg) scale(0.8) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(15deg) scale(1) translateZ(0);
+  }
+}
+
+@keyframes hero-glass-b {
+  from {
+    opacity: 0;
+    transform: rotate(20deg) scale(0.8) translateZ(0);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(10deg) scale(1) translateZ(0);
+  }
+}
+
+@keyframes hero-float-panel {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0) rotate(-5deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+@keyframes hero-tech-card {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 40px, 0) rotate(-8deg);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+/* Right column: opacity only so parallax `transform` on parent never fights keyframes */
+@keyframes hero-media-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.hero-enter {
+  animation: hero-rise 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  will-change: transform, opacity;
+}
+
+.hero-enter-d1 {
+  animation-delay: 0.1s;
+}
+.hero-enter-d2 {
+  animation-delay: 0.2s;
+}
+.hero-enter-d3 {
+  animation-delay: 0.3s;
+}
+.hero-enter-d4 {
+  animation-delay: 0.4s;
+}
+.hero-enter-d5 {
+  animation-delay: 0.5s;
+}
+
+.hero-glass-a {
+  animation: hero-glass-a 1.2s ease-out both;
+  will-change: transform, opacity;
+}
+
+.hero-glass-b {
+  animation: hero-glass-b 1.4s ease-out 0.2s both;
+  will-change: transform, opacity;
+}
+
+.hero-float-panel {
+  animation: hero-float-panel 1s ease-out 0.5s both;
+  will-change: transform, opacity;
+}
+
+.hero-tech-card-inner {
+  animation: hero-tech-card 1s ease-out 0.4s both;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform, opacity;
+}
+
+.hero-media-enter {
+  animation: hero-media-fade 0.65s ease-out 0.5s both;
+  will-change: opacity;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-tech-card-wrap:hover .hero-tech-card-inner {
+    transform: translate3d(0, -8px, 0);
+  }
+
+  .hero-status-wrap:hover .hero-status-inner {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+.hero-status-inner {
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter,
+  .hero-glass-a,
+  .hero-glass-b,
+  .hero-float-panel,
+  .hero-tech-card-inner,
+  .hero-media-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-tech-card-wrap:hover .hero-tech-card-inner,
+  .hero-status-wrap:hover .hero-status-inner {
+    transform: none;
+  }
+}
+
+/* App shell (Layout `<main>`) — replaces Framer page entrance */
+@keyframes layout-main-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 24px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.shell-main-enter {
+  animation: layout-main-enter 0.4s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shell-main-enter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
 }

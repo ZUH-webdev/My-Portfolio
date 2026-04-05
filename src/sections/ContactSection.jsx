@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react'
-import emailjs from '@emailjs/browser'
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { Mail, MapPin, ArrowRight } from 'lucide-react'
 
@@ -56,6 +55,7 @@ const ContactSection = () => {
         message: formData.get('message'),
       }
 
+      const { default: emailjs } = await import('@emailjs/browser')
       await emailjs.send(serviceId, templateId, payload, publicKey)
       setStatus('success')
       form.reset()

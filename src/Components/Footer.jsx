@@ -66,13 +66,13 @@ const Footer = () => {
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Subtle Watermark - Anchored low */}
         <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 select-none">
-          <div aria-hidden="true" className="text-[35vw] font-black text-white/[0.02] leading-none tracking-tighter font-syne uppercase">
+          <div aria-hidden="true" className="text-[35vw] font-black text-white/[0.02] leading-none tracking-tighter font-geist uppercase">
             ZAIN
           </div>
         </div>
         
         {/* Grain Overlay */}
-        <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')] pointer-events-none" />
+        <div className="absolute inset-0 opacity-[0.02] mix-blend-overlay layout-grain pointer-events-none" />
 
         {/* Minimal Glow */}
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[120%] h-full bg-[radial-gradient(circle_at_50%_100%,rgba(79,70,229,0.06),transparent_80%)]" />
@@ -87,7 +87,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center md:items-center gap-10">
             {/* Vision Text - High Impact / Minimal Footprint */}
             <div className="max-w-2xl text-center md:text-left">
-              <p className="text-slate-300 text-xl md:text-2xl lg:text-3xl font-outfit leading-[1.2] font-light">
+              <p className="text-slate-300 text-xl md:text-2xl lg:text-3xl font-geist leading-[1.2] font-light">
                 Engineering <span className="text-white font-medium italic">digital symphonies</span> where engineering precision meets aesthetic obsession.
               </p>
             </div>
@@ -98,7 +98,7 @@ const Footer = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.7)]"></span>
               </div>
-              <span className="text-[11px] font-syne uppercase tracking-[0.3em] text-slate-100 font-bold whitespace-nowrap">
+              <span className="text-[11px] font-geist uppercase tracking-[0.3em] text-slate-100 font-bold whitespace-nowrap">
                 Ready: Q2/Q3 2026
               </span>
             </div>
