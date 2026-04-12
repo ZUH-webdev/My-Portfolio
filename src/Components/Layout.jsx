@@ -4,8 +4,8 @@ import HeroSection from '../sections/HeroSection'
 import DeferredMount from './DeferredMount'
 
 const AboutSection = lazy(() => import('../sections/AboutSection'))
-const ServicesSection = lazy(() => import('../sections/ServicesSection'))
-const ProjectsSection = lazy(() => import('../sections/ProjectsSection'))
+import ServicesSection from '../sections/ServicesSection'
+import ProjectsSection from '../sections/ProjectsSection'
 const ExperienceSection = lazy(() => import('../sections/ExperienceSection'))
 const TestimonialsSection = lazy(() => import('../sections/TestimonialsSection'))
 const ContactSection = lazy(() => import('../sections/ContactSection'))
@@ -108,17 +108,9 @@ const Layout = () => {
             </Suspense>
           </DeferredMount>
 
-          <DeferredMount id="services" minHeight="70vh" rootMargin="0px 0px 280px 0px">
-            <Suspense fallback={null}>
-              <ServicesSection />
-            </Suspense>
-          </DeferredMount>
+          <ServicesSection />
 
-          <DeferredMount id="projects" minHeight="90vh" rootMargin="0px 0px 280px 0px">
-            <Suspense fallback={null}>
-              <ProjectsSection />
-            </Suspense>
-          </DeferredMount>
+          <ProjectsSection />
 
           <DeferredMount id="experience" minHeight="85vh" rootMargin="0px 0px 280px 0px">
             <Suspense fallback={null}>

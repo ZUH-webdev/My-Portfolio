@@ -18,9 +18,12 @@ const Header = ({ handleNavClick, mobileOpen, setMobileOpen, onOpenContact }) =>
         className="relative flex items-center justify-between rounded-full border border-white/10 bg-[#020617]/60 px-6 py-3 backdrop-blur-md shadow-[0_8px_32px_0_rgba(0,0,0,0.8)]"
         aria-label="Primary"
       >
-        <button
-          type="button"
-          onClick={() => handleNavClick('hero')}
+        <a
+          href="#hero"
+          onClick={(e) => {
+            e.preventDefault()
+            handleNavClick('hero')
+          }}
           className="group flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 rounded-full"
         >
           <div className="relative">
@@ -39,18 +42,21 @@ const Header = ({ handleNavClick, mobileOpen, setMobileOpen, onOpenContact }) =>
               ZAIN <span className="text-indigo-400">.</span>
             </span>
           </div>
-        </button>
+        </a>
 
         <div className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => (
-            <button
+            <a
               key={item.id}
-              type="button"
-              onClick={() => handleNavClick(item.id)}
+              href={`#${item.id}`}
+              onClick={(e) => {
+                e.preventDefault()
+                handleNavClick(item.id)
+              }}
               className="relative rounded-full px-4 py-2 text-sm font-medium text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
             >
               {item.label}
-            </button>
+            </a>
           ))}
         </div>
 

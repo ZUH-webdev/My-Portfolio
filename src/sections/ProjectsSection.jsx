@@ -5,23 +5,6 @@ import Magnetic from '../Components/Magnetic'
 
 const projects = [
   {
-    id: 'ecommerce-platform',
-    name: 'Multi-Markets E-Commerce',
-    subtitle: 'Scalable marketplace platform with real-time inventory & checkout optimization.',
-    description: 'Built a production-grade e-commerce platform handling high-volume transactions. Achieved 99.9% uptime and optimized checkout flow for 40% conversion rate improvement.',
-    impact: [
-      { metric: '99.9%', label: 'Uptime' },
-      { metric: '800ms', label: 'LCP Score' },
-      { metric: '+40%', label: 'Conversion' },
-    ],
-    tech: ['React', 'Tailwind CSS', 'Firebase', 'Stripe'],
-    role: 'Full-stack Frontend, Payment Integration',
-    image: '/multimarkets.webp',
-    link: 'https://multimarkets.vercel.app/',
-    github: 'https://github.com/ZUH-webdev/Multimarkets',
-    featured: true,
-  },
-  {
     id: 'utility-tools',
     name: 'Pocket Tools - All-in-One',
     subtitle: 'Comprehensive suite of 80+ professional online tools for developers.',
@@ -52,6 +35,23 @@ const projects = [
     image: '/Flutron.webp',
     link: 'https://flutron.show',
     github: 'https://github.com/ZUH-webdev/Flutron.show',
+  },
+  {
+    id: 'ecommerce-platform',
+    name: 'Multi-Markets E-Commerce',
+    subtitle: 'Scalable marketplace platform with real-time inventory & checkout optimization.',
+    description: 'Built a production-grade e-commerce platform handling high-volume transactions. Achieved 99.9% uptime and optimized checkout flow for 40% conversion rate improvement.',
+    impact: [
+      { metric: '99.9%', label: 'Uptime' },
+      { metric: '800ms', label: 'LCP Score' },
+      { metric: '+40%', label: 'Conversion' },
+    ],
+    tech: ['React', 'Tailwind CSS', 'Firebase', 'Stripe'],
+    role: 'Full-stack Frontend, Payment Integration',
+    image: '/multimarkets.webp',
+    link: 'https://multimarkets.vercel.app/',
+    github: 'https://github.com/ZUH-webdev/Multimarkets',
+    featured: true,
   },
 ]
 
@@ -95,7 +95,7 @@ const ProjectCard = ({ project, index }) => {
                   src={project.image} 
                   alt={`${project.name} - ${project.subtitle} | Full Stack Development Project`} 
                   className="w-full h-full object-cover object-top opacity-90 hover:opacity-100 transition-opacity duration-500 hover:scale-105"
-                  loading="lazy"
+                  loading="eager"
                 />
                 
                 {/* Premium Overlay Gradient */}
@@ -214,6 +214,7 @@ const ProjectCard = ({ project, index }) => {
 const ProjectsSection = () => {
   return (
     <section
+      id="projects"
       aria-label="Projects"
       className="relative rounded-3xl border border-white/5 bg-[#020617]/50 px-6 pt-32 pb-20 shadow-[0_0_80px_rgba(15,23,42,0.9)] sm:px-12 lg:px-20 lg:py-32 backdrop-blur-3xl overflow-hidden"
     >
