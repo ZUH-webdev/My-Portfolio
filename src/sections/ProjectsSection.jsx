@@ -21,6 +21,21 @@ const projects = [
     github: 'https://github.com/ZUH-webdev/My-Pocket-Tools',
   },
   {
+    id: 'cavalo-financing',
+    name: 'Cavalo Financing Landing Page',
+    subtitle: 'High-conversion financial services landing page for SME lending in Mexico.',
+    description: 'Designed and developed a fast-loading B2B landing page focused on trust, clarity, and lead generation. Delivered mobile-optimized UX with direct WhatsApp CTA flow to shorten inquiry time.',
+    impact: [
+      { metric: '24h', label: 'Lead Response Focus' },
+      { metric: 'B2B', label: 'Finance Positioning' },
+      { metric: 'WA', label: 'Direct CTA Channel' },
+    ],
+    tech: ['Carrd', 'Responsive UI', 'Conversion Copy', 'CTA Optimization'],
+    role: 'Web Designer, Carrd Developer',
+    image: '/Cavaloo-financing.webp',
+    link: 'https://cavalo.com.mx',
+  },
+  {
     id: 'corporate-website',
     name: 'Flutron Corporate Hub',
     subtitle: 'High-performance corporate site optimized for lead generation & SEO.',
@@ -53,6 +68,7 @@ const projects = [
     github: 'https://github.com/ZUH-webdev/Multimarkets',
     featured: true,
   },
+  
 ]
 
 const ProjectCard = ({ project, index }) => {
@@ -189,15 +205,17 @@ const ProjectCard = ({ project, index }) => {
                 </a>
               </Magnetic>
 
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all duration-300"
-              >
-                <Github size={16} />
-                <span className="font-medium">Repository</span>
-              </a>
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/20 bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white transition-all duration-300"
+                >
+                  <Github size={16} />
+                  <span className="font-medium">Repository</span>
+                </a>
+              )}
             </div>
           </div>
         </motion.div>
