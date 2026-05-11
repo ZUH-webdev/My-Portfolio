@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { Github, Linkedin, Twitter, ArrowUp, Instagram } from 'lucide-react'
+import { Github, Linkedin, ArrowUp, Instagram, Briefcase } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
 import Magnetic from './Magnetic'
 
@@ -53,7 +53,7 @@ const Footer = () => {
   const socialLinks = [
     { name: 'GitHub', url: 'https://github.com', icon: Github },
     { name: 'LinkedIn', url: 'https://linkedin.com', icon: Linkedin },
-    { name: 'X', url: 'https://twitter.com', icon: Twitter },
+    { name: 'Upwork', url: 'https://www.upwork.com/freelancers/~01143c0f702d75da0d', icon: Briefcase },
     { name: 'Instagram', url: 'https://instagram.com', icon: Instagram },
   ]
 
